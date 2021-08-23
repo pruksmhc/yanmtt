@@ -316,7 +316,7 @@ class PreTrainedTokenizer(PreTrainedTokenizerBase):
             if not text.strip():
                 return []
             if not tok_list:
-                return self._tokenize(text, kwargs["sample"], kwargs["nbest"], kwargs["alpha_or_dropout"])
+                return self._tokenize(token) 
 
             tokenized_text = []
             text_list = [text]
@@ -332,8 +332,8 @@ class PreTrainedTokenizer(PreTrainedTokenizerBase):
             return list(
                 itertools.chain.from_iterable(
                     (
-                        self._tokenize(token, kwargs["sample"], kwargs["nbest"], kwargs["alpha_or_dropout"]) if token not in self.unique_no_split_tokens else [token]
-                        for token in tokenized_text
+                       self._tokenize(token) if token not in self.unique_no_split_tokens else [token]
+                       for token in tokenized_text
                     )
                 )
             )
